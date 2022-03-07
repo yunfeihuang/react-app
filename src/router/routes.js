@@ -3,11 +3,11 @@ import AsyncLoader from './AsyncLoader'
 const routes = [
   {
     path: '/',
-    component: AsyncLoader(() => import('../pages/index'), () => import('../reducer/index.js'))
+    component: AsyncLoader(() => import('../pages/index'), () => import('../store/index.js'))
   },
   {
     path: '/mine',
-    component: AsyncLoader(() => import('../pages/mine'), () => import('../reducer/index.js'))
+    component: AsyncLoader(() => import('../pages/mine'))
   }
 ]
 

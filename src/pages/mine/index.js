@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
-import { Context } from '../../reducer/global'
+import { Context } from '../../store/global'
 
 /** @jsxImportSource @emotion/react */
 export default function (props) {

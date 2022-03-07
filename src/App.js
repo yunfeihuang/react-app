@@ -3,7 +3,7 @@ import Router from './router'
 import './App.scss'
 import { ConfigProvider } from 'antd'
 import 'antd/dist/antd.css'
-import { Provider } from './reducer/global'
+import { Provider } from './store/global'
 
 function App() {
   return (
