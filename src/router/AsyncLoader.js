@@ -23,6 +23,21 @@ export default (importComponent, importReducer) => {
           }, () => {
             
           })
+        } else if (importReducer instanceof Array) {
+          Promise.all(importReducer.map(item => item())).then(res => {
+            this.setState({
+              loading: false,
+              Component,
+              Provider: res.map(item => {
+                return item.Provider
+              }).reverse()
+            })
+          })
+        } else {
+          this.setState({
+            loading: false,
+            Component
+          })
         }
       } else {
         this.setState({
@@ -33,11 +48,29 @@ export default (importComponent, importReducer) => {
         })
       }
     }
-
+    renderProviders () {
+      let result = null
+      const C = this.state.Component
+      const fn = (Item, children) => {
+        if (children) {
+          return <Item>{children}</Item>
+        } else {
+          return <Item><C {...this.props} /></Item>
+        }
+      }
+      this.state.Provider.forEach((item,i) => {
+        if (i === 0) {
+          result = fn(item)
+        } else {
+          result = fn(item, result)
+        }
+      })
+      return result
+    }
     render() {
       const C = this.state.Component
       const Provider = this.state.Provider
-      return !this.state.loading ? Provider ? <Provider><C {...this.props} /></Provider> : <C {...this.props} /> : <div>加载中</div>
+      return !this.state.loading ? Provider ? Provider instanceof Array ? this.renderProviders() : <Provider><C {...this.props} /></Provider> : <C {...this.props} /> : <div>加载中</div>
     }
   }
   return AsyncLoader

@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom'
-import { Context } from '../../store/index.js'
+import { Context } from './reducer.js'
+import Mine from './components/Mine.js'
 import {Button} from 'antd'
 
 /** @jsxImportSource @emotion/react */
@@ -11,5 +12,6 @@ export default function (props) {
     Index Page<br/>count：{state.count}<br/>
     <Button onClick={() => {dispatch({type: 'increment'})}}>+</Button>
     <Button onClick={() => {dispatch({type: 'decrement'})}}>-</Button>
+    <Mine/>
   </div>)
 };
